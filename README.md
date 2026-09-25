@@ -2,7 +2,12 @@
 
 An ASCII ocean loader. Blue water washes into a pure white square from the left in four gentle waves. Each wave pulls back a little and leaves blue `+ = - :` grains on the sand, then the next one reaches further. The fourth wave fills the square, it holds for three seconds, and the loop restarts.
 
-Open `index.html` in a browser. No build step, no dependencies (IBM Plex Mono loads from Google Fonts, with a monospace fallback).
+Two versions:
+
+- **Smooth** (`index.html`, live at https://dakotashao.github.io/tide-loader/): the wave front is one smooth curve.
+- **Strips** (`strips/index.html`, live at https://dakotashao.github.io/tide-loader/strips/): the water arrives as thin horizontal strips with ragged ends, and sunlight flashes along the wave crests as they roll toward the shore.
+
+Open either file in a browser. No build step, no dependencies (IBM Plex Mono loads from Google Fonts, with a monospace fallback).
 
 ## Tuning
 
