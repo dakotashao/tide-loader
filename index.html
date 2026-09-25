@@ -60,7 +60,7 @@ button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent)
 
   const COLS = 52, ROWS = 52;
   const FILL = 12, HOLD = 3, EBB = 0, REST = 0;   // no ebb: fill, hold 3s, restart   // seconds
-  const DRY = 1.1;                                       // how fast the wet trail dries, columns per second
+  const DRY = 0;       // sand left by a wave stays put until the next wave covers it
   // the tide comes in as a series of surges: run up, pull back a little, run up further
   const PEAKS   = [.30, .55, .78, 1.0];
   const TROUGHS = [.21, .46, .69];
@@ -155,12 +155,11 @@ button[aria-pressed="true"]{background:var(--accent); border-color:var(--accent)
 
         if (d < 0 && xl < wet[r]){
           // wet sand the wave just left: scattered blue grains and bubbles, densest along the high-water line
-          const fromMark = wet[r] - xl;
-          const density = fromMark < 1.3 ? .7 : .26 + .28*clamp(1 + d/3, 0, 1);
+          // grains are fixed to the sand: same cells, same symbols, no flicker
           const k = hash(c*1.3, r*1.7);
-          if (k < density && hash(c, r + Math.floor(tt*4)) < .9){
+          if (k < .34){
             const g = FRAG[Math.floor(hash(r, c)*FRAG.length)];
-            ctx.fillStyle = k < density*.45 ? rgb(MID) : rgb(SHALLOW);
+            ctx.fillStyle = k < .15 ? rgb(MID) : rgb(SHALLOW);
             ctx.fillText(g, cx, cy);
           }
           continue;
