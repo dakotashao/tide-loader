@@ -1,27 +1,40 @@
 # Tide Loader
 
-An ASCII ocean loader. Blue water washes into a pure white square from the left in four gentle waves. Each wave pulls back a little and leaves blue `+ = - :` grains on the sand, then the next one reaches further. The fourth wave fills the square, it holds for three seconds, and the loop restarts.
+An ASCII ocean loader. Blue water washes into a pure white square from the left, pulls back a little, leaves blue `+ = - :` grains on the sand, then reaches further.
 
-Two determinate versions (fill once, hold, restart):
+**Live:** https://dakotashao.github.io/tide-loader/
 
-- **Smooth** (`index.html`, live at https://dakotashao.github.io/tide-loader/): the wave front is one smooth curve.
-- **Strips** (`strips/index.html`, live at https://dakotashao.github.io/tide-loader/strips/): the water arrives as thin horizontal strips with ragged ends, and sunlight flashes along the wave crests as they roll toward the shore.
+## Versions
 
-Indeterminate (endless) versions, for when there is no progress to show. The water washes in and out around the middle of the square forever, each wave reaching a slightly different distance, and never fills or resets:
+|  | Smooth | Strips |
+| --- | --- | --- |
+| **Loading** — four waves fill the square, hold 3 s, restart | [`/smooth/`](https://dakotashao.github.io/tide-loader/smooth/) | [`/strips/`](https://dakotashao.github.io/tide-loader/strips/) |
+| **Endless** — the tide keeps coming and going, never fills | [`/smooth-endless/`](https://dakotashao.github.io/tide-loader/smooth-endless/) | [`/strips-endless/`](https://dakotashao.github.io/tide-loader/strips-endless/) |
 
-- **Smooth, endless** (`endless/index.html`, live at https://dakotashao.github.io/tide-loader/endless/)
-- **Strips, endless** (`strips-endless/index.html`, live at https://dakotashao.github.io/tide-loader/strips-endless/)
+- **Smooth**: the wave front is one continuous curve.
+- **Strips**: the water arrives as thin horizontal strips with ragged ends, and sunlight flashes along the wave crests as they roll toward the shore.
 
-Open either file in a browser. No build step, no dependencies (IBM Plex Mono loads from Google Fonts, with a monospace fallback).
+## Structure
+
+```
+index.html              overview page linking all four
+smooth/                 loading, smooth edge
+strips/                 loading, strips
+smooth-endless/         endless, smooth edge
+strips-endless/         endless, strips
+```
+
+Each folder holds a self-contained `index.html` (open it directly in a browser, no build step) and a `preview.png` used for link previews. IBM Plex Mono loads from Google Fonts, with a monospace fallback.
 
 ## Tuning
 
-All at the top of the script in `index.html`:
+All at the top of the script in each `index.html`:
 
 | Constant | What it does |
 | --- | --- |
-| `PEAKS` / `TROUGHS` | How far each wave reaches, and where it pulls back to (0–1 of the square) |
-| `FILL` / `HOLD` | Seconds to fill, seconds to hold before restarting |
-| `DRY` | How fast the leftover grains disappear |
+| `PEAKS` / `TROUGHS` | Loading versions: how far each wave reaches, and where it pulls back to (0–1 of the square) |
+| `FILL` / `HOLD` | Loading versions: seconds to fill, seconds to hold before restarting |
+| `WAVE` | Endless versions: seconds per wave |
+| `DRY` | How fast the leftover grains disappear (0 = they stay until the next wave covers them) |
 | `COLS` / `ROWS` | Grid density |
-| `RAMP` | Characters used inside the water, sparse → dense |
+| `BAND` | Strips versions: rows per strip |
